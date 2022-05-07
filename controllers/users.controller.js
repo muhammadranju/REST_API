@@ -1,22 +1,22 @@
 const user = require("../models/users");
 const { v4: uuidv4 } = require("uuid");
-const { MongoClient } = require("mongodb");
-const url =
-   "mongodb+srv://Ranju:ranju123@cluster0.jzvet.mongodb.net/userDB?retryWrites=true&w=majority";
-const client = new MongoClient(url);
 
 // get users
 const getAllUser = (req, res) => {
-   async function getData(res) {
-      let resutl = await client.connect();
-      const db = resutl.db("userDB");
-      const collection = db.collection("users");
-      const responce = await collection.find({}).toArray();
-      //   console.log(responce);
-      res.json(responce);
-   }
-   getData(res);
+   res.json({ user });
 };
+
+// const getAllUser = (req, res) => {
+//    async function getData(res) {
+//       let resutl = await client.connect();
+//       const db = resutl.db("userDB");
+//       const collection = db.collection("users");
+//       const responce = await collection.find({}).toArray();
+//       //   console.log(responce);
+//       res.json(responce);
+//    }
+//    getData(res);
+// };
 
 //find user
 const getIdUser = (req, res) => {

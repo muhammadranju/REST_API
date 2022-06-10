@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send to the server Useing Node js </title>
+</head>
+
+<body>
+
+    <form id="user">
+        <label for="">Titel</label>
+        <input type="text" name="titel" id="titel"><br> <br>
+
+        <label for="">Description</label>
+        <input type="text" name="dest" id="dest"><br><br>
+
+        <label for="">Status</label>
+        <input type="text" name="status" id="status"> <br> <br>
+        <!-- <input type="submit" name="status" id="apiForm" value="Submit"> -->
+
+        <button type="submit" id="userform">Submit</button>
+    </form>
+    <p id="showError"></p>
+
+
+    <!-- <form action="http://localhost:5000/send" method="post" enctype="multipart/form-data">
+        <input type="file" name="avatar" /><br>
+        <input type="file" name="gallery" />
+        <input type="submit" value="Send">
+    </form> -->
+
+    <script>
+        const from = document.querySelector('#user')
+        const titel = document.querySelector('#titel')
+        const dest = document.querySelector('#dest')
+        const status = document.querySelector('#status')
+        const showError = document.querySelector('#showError')
+
+        from.onsubmit = async function (event) {
+            event.preventDefault()
+            const formData = new FormData(from)
+
+            let responce = await fetch('/api/post', {
+                method: 'POST',
+                body: formData
+            })
+            let result = await responce.json()
+            console.log(result);
+        }
+
+        // async function handelForm(e) {
+        //     e.preventDefault()
+        //     const fromObj = {
+        //         titel: titel.value,
+        //         dest: dest.value,
+        //         status: status.value
+        //     }
+        //     // const formData = new FormData(fromObj)
+        //     const responce = await fetch("/api/post", {
+        //         method: 'POST',
+        //         body: fromObj
+        //     });
+        //     let result = await responce.json()
+        //     console.log(result);
+        // }
+        // from.addEventListener("click", async function (e) {
+        //     e.preventDefault();
+        //     const userFrom = document.querySelector('#user')
+        //     const formData = new FormData(userFrom);
+
+        //     let responce = await fetch("/api/post", {
+        //         method: "POST",
+        //         body: formData,
+        //     });
+        //     let result = await responce.json();
+        //     console.log(result);
+        // });
+
+        // from.addEventListener("submit", async (e) => {
+        //     e.preventDefault();
+        //     if (titel === '') {
+        //         showError.innerHTML = 'all fineds are requerd'
+        //     }
+        //     const fromObj = {
+        //         titel: titel.value,
+        //         dest: dest.value,
+        //         status: status.value
+        //     }
+        //     // const fromData = new FormData(fromObj)
+        //     const responce = await fetch("/api/post", {
+        //         method: 'POST',
+        //         body: fromObj
+        //     });
+        //     let result = await responce.json()
+        //     console.log(result);
+        // })
+        //  = async function (e) {
+        //     e.preventDefault();
+        //     if (titel && dest && status === '') {
+        //         showError.innerHTML = 'all fineds are requerd'
+        //     }
+        // const fromData = new FormData(from)
+        // const responce = await fetch("/api/post", {
+        //     method: 'POST',
+        //     body: fromData
+        // });
+        // let result = await responce.json()
+        // console.log(result);
+        // }
+    </script>
+</body>
+
+</html>
